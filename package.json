@@ -1,0 +1,17 @@
+{
+  "name": "simple-template-str",
+  "version": "1.0.0",
+  "description": "python format string in JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "templateString"
+  ],
+  "author": "Daniel Hemmati",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.0.3"
+  }
+}

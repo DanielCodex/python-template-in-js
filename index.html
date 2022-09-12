@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // u can run xss attack on this
+      function tpl(str, props) { 
+        let names = Object.keys(props);
+        let vals = Object.values(props);
+        return new Function(...names, `return \`${str}\`;`)(...vals);
+      }
+      console.log(tpl("${alert(1)} ${b}", { a: "hello", b: "world" }));
+
+      // probably u can do regexDDos: https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS
+      function format(str, ...rest) {
+        if (typeof str !== "string" || str instanceof String) {
+          return false;
+        }
+
+        let re = /\{(\w+)\}/g; // match curl bracket and value inside
+        let replaceWith = [...rest]; // get a copy
+        let allCurly = str.match(re) || []; // get all curl bracket
+        for (let i = 0; i < allCurly.length; i++) {
+          // loop through the curl bracket
+          str = str.replace(allCurly[i], replaceWith[i]); // replace them in str
+        }
+        return str;
+      }
+      format("{a} {b}", "daniel", "hemamti");
+    </script>
+  </body>
+</html>
