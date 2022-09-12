@@ -1,16 +1,16 @@
 /**
  *
  * @param {string} str
- * @param  {...any} rest
+ * @param  {...any} values
  * @returns
  */
-function format(str, ...rest) {
+function format(str, ...values) {
   if (typeof str !== "string" || str instanceof String) {
     return false;
   }
 
   let re = /\{(\w+)\}/g; // match curl bracket and value inside
-  let replaceWith = [...rest]; // get a copy 
+  let replaceWith = [...values]; // get a copy 
   let allCurly = str.match(re) || []; // get all curl bracket
   for (let i = 0; i < allCurly.length; i++) { // loop through the curl bracket
     str = str.replace(allCurly[i], replaceWith[i]); // replace them in str
